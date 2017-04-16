@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 using AutoSwitcher.Input.Api;
 using AutoSwitcher.Window.Api;
@@ -40,11 +41,17 @@ namespace AutoSwitcher
 
         private void button_Click(object sender, EventArgs e)
         {
-            timer.Interval = (int)numInterval.Value;
-
-            if (numStop.Value > numInterval.Value)
+            if (string.IsNullOrEmpty(txtStop.Text) || string.IsNullOrEmpty(txtInterval.Text))
             {
-                stopTimes = (int) (numStop.Value/numInterval.Value);
+                MessageBox.Show("请输入正确时间间隔");
+                return;
+            }
+
+            timer.Interval = (int) (txtInterval.Text.ToNum()*1000*60);
+
+            if (txtStop.Text.ToNum() > txtInterval.Text.ToNum())
+            {
+                stopTimes = (int) (txtStop.Text.ToNum()/txtInterval.Text.ToNum());
             }
             else
             {
@@ -109,6 +116,34 @@ namespace AutoSwitcher
             {
                 Log.Info(w.ProcessName);
             }
+        }
+
+        private void txtInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && e.KeyChar != 46 && 
+                !char.IsDigit(e.KeyChar) && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtInterval_Leave(object sender, EventArgs e)
+        {
+            txtInterval.Text = txtInterval.Text.ToNum().ToString(CultureInfo.CurrentCulture);
+        }
+
+        private void txtStop_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != 8 && e.KeyChar != 46 &&
+                !char.IsDigit(e.KeyChar) && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtStop_Leave(object sender, EventArgs e)
+        {
+            txtStop.Text = txtStop.Text.ToNum().ToString(CultureInfo.CurrentCulture);
         }
     }
 }

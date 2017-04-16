@@ -32,19 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.numInterval = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.numStop = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStop)).BeginInit();
+            this.txtInterval = new System.Windows.Forms.TextBox();
+            this.txtStop = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,29 +62,6 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // numInterval
-            // 
-            this.numInterval.Location = new System.Drawing.Point(99, 23);
-            this.numInterval.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numInterval.Maximum = new decimal(new int[] {
-            3600,
-            0,
-            0,
-            0});
-            this.numInterval.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numInterval.Name = "numInterval";
-            this.numInterval.Size = new System.Drawing.Size(66, 26);
-            this.numInterval.TabIndex = 2;
-            this.numInterval.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -105,7 +80,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 20);
             this.label2.TabIndex = 4;
-            this.label2.Text = "毫秒";
+            this.label2.Text = "分钟";
             // 
             // label3
             // 
@@ -115,7 +90,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 20);
             this.label3.TabIndex = 7;
-            this.label3.Text = "毫秒";
+            this.label3.Text = "分钟";
             // 
             // label4
             // 
@@ -126,34 +101,6 @@
             this.label4.Size = new System.Drawing.Size(79, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "重新开始：";
-            // 
-            // numStop
-            // 
-            this.numStop.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numStop.Location = new System.Drawing.Point(99, 85);
-            this.numStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numStop.Maximum = new decimal(new int[] {
-            36000,
-            0,
-            0,
-            0});
-            this.numStop.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numStop.Name = "numStop";
-            this.numStop.Size = new System.Drawing.Size(66, 26);
-            this.numStop.TabIndex = 5;
-            this.numStop.Value = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
             // 
             // label5
             // 
@@ -210,11 +157,33 @@
             this.label8.TabIndex = 12;
             this.label8.Text = "云茂软件";
             // 
+            // txtInterval
+            // 
+            this.txtInterval.Location = new System.Drawing.Point(99, 22);
+            this.txtInterval.Name = "txtInterval";
+            this.txtInterval.Size = new System.Drawing.Size(66, 26);
+            this.txtInterval.TabIndex = 13;
+            this.txtInterval.Text = "10";
+            this.txtInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInterval_KeyPress);
+            this.txtInterval.Leave += new System.EventHandler(this.txtInterval_Leave);
+            // 
+            // txtStop
+            // 
+            this.txtStop.Location = new System.Drawing.Point(99, 84);
+            this.txtStop.Name = "txtStop";
+            this.txtStop.Size = new System.Drawing.Size(66, 26);
+            this.txtStop.TabIndex = 14;
+            this.txtStop.Text = "10";
+            this.txtStop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStop_KeyPress);
+            this.txtStop.Leave += new System.EventHandler(this.txtStop_Leave);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 231);
+            this.Controls.Add(this.txtStop);
+            this.Controls.Add(this.txtInterval);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label7);
@@ -222,10 +191,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.numStop);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numInterval);
             this.Controls.Add(this.button);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -233,8 +200,6 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AutoSwither";
-            ((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -245,17 +210,17 @@
 
         private System.Windows.Forms.Button button;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.NumericUpDown numInterval;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numStop;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtInterval;
+        private System.Windows.Forms.TextBox txtStop;
     }
 }
 

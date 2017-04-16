@@ -57,6 +57,7 @@
     <Compile Include="Input.Api\KeyboardShortcut.cs" />
     <Compile Include="Input.Api\KeyboardVirtualKeys.cs" />
     <Compile Include="Input.Api\VirtualKeyDescription.cs" />
+    <Compile Include="StringEx.cs" />
     <Compile Include="Window.Api\IWindowEntry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
